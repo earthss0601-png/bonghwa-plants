@@ -863,7 +863,8 @@ try {
   L.marker([SCHOOL.lat, SCHOOL.lon], { icon: icon('school'), zIndexOffset: 1000 }).addTo(map).bindPopup('<b>춘양중학교</b><br>우리 학교');
   SITES.forEach(st => { markers[st.key] = L.marker([st.lat, st.lon], { icon: icon(st.cls), zIndexOffset: 900 }).addTo(map).bindPopup(siteCard(st)); });
   buildZoneLayers();
-  map.fitBounds([[36.885, 128.75], [37.05, 128.995]]);
+  const home = () => { map.invalidateSize(); map.fitBounds([[36.885, 128.75], [37.05, 128.995]]); };
+  home(); window.addEventListener("load", home); setTimeout(home, 800);
 } catch (e) { $('map').hidden = true; }
 
 render();
