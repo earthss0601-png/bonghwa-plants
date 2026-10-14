@@ -634,7 +634,7 @@ const markers = {};
 let map = null;
 function siteCard(st) {
   const n = PLANTS.filter(p => p.src.includes(st.key)).length;
-  return `<b>${st.name}</b>${st.area} · 학교에서 약 ${km(SCHOOL, st)}km<br>${st.note ? st.note : `도감 식물 ${n}종 기록`}<br><span style="opacity:.75">조사: ${st.paper}</span>`;
+  return `<b>${st.name}</b><br>${st.area} · 학교에서 약 ${km(SCHOOL, st)}km<br>${st.note ? st.note : `도감 식물 ${n}종 기록`}<br><span style="opacity:.75">조사: ${st.paper}</span>`;
 }
 $('sites').innerHTML = `<div class="site static school"><b>춘양중학교</b><small>우리 학교 · 지도의 파란 점</small></div>` +
   SITES.map(st => st.note
