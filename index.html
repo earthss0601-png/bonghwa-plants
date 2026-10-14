@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="청량산·국립백두대간수목원 식물상 조사에서 기록된 봉화 자생식물 40종을 계절, 사는 곳, 꽃 색, 잎 모양으로 찾아보는 학생용 도감">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>봉화 자생식물 도감</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Crimson+Pro:ital,wght@1,400;1,500&display=swap">
+<style>
+/* Layout: herbarium cabinet — a filter "찾기 도우미" rail beside a grid of specimen-label cards; detail opens as a specimen sheet. */
+:root {
+  --bg: #EEF2EC;
+  --paper: #FBFCF8;
+  --ink: #1B2620;
+  --muted: #5B695F;
+  --line: #CAD4CA;
+  --pine: #24563F;
+  --pine-soft: #DCE8DE;
+  --on-pine: #FFFFFF;
+  --pollen: #9A6F08;
+  --caution-bg: #FBEDE6;
+  --caution-ink: #8A3418;
+  --shadow: 0 1px 2px rgba(27, 38, 32, .06), 0 6px 18px rgba(27, 38, 32, .06);
+  --fl-white: #F6F4EE;
+  --fl-yellow: #E5BE2E;
+  --fl-pink: #E696B6;
+  --fl-red: #B23F4C;
+  --fl-purple: #8C69B8;
+  --fl-blue: #557CC6;
+  --fl-orange: #E2843A;
+  --fl-green: #8DA487;
+  --f-display: 'Gowun Batang', 'Nanum Myeongjo', 'Batang', serif;
+  --f-body: 'IBM Plex Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --f-latin: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1512; --paper: #172019; --ink: #E1EAE2; --muted: #97A69B; --line: #2C3A31;
+    --pine: #82C6A1; --pine-soft: #1E3228; --on-pine: #0C1810; --pollen: #E2B749;
+    --caution-bg: #3A1F15; --caution-ink: #F3B79C;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.25);
+    --fl-white: #E9E6DD; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1512; --paper: #172019; --ink: #E1EAE2; --muted: #97A69B; --line: #2C3A31;
+  --pine: #82C6A1; --pine-soft: #1E3228; --on-pine: #0C1810; --pollen: #E2B749;
+  --caution-bg: #3A1F15; --caution-ink: #F3B79C;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.25);
+  --fl-white: #E9E6DD; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; padding-inline: 16px; padding-block: 0 48px; }
+.wrap { max-width: 1180px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2.5px solid var(--pine); outline-offset: 2px; border-radius: 6px; }
+
+/* header */
+.masthead { padding-block: 36px 18px; display: grid; gap: 10px; position: relative; }
+.eyebrow { font-size: 12.5px; letter-spacing: .14em; color: var(--pine); font-weight: 600; }
+.masthead h1 { font-size: clamp(32px, 5vw, 50px); line-height: 1.15; font-weight: 700; }
+.masthead p { margin: 0; color: var(--muted); max-width: 60ch; }
+.ridge { width: 100%; height: 54px; display: block; color: var(--pine); margin-top: 6px; }
+.stats { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--ink); font-weight: 600; }
+
+/* layout */
+.layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+
+/* finder */
+.finder { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 16px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+@media (max-width: 860px) { .finder { position: static; } }
+.finder h2 { font-size: 20px; }
+.finder .hint { font-size: 13px; color: var(--muted); margin: -10px 0 0; }
+.search { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--ink); font: inherit; }
+.q { display: grid; gap: 7px; }
+.q-label { font-size: 13.5px; font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 4px 11px; font-size: 13.5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; line-height: 1.4; }
+.chip:hover { border-color: var(--pine); }
+.chip[aria-pressed="true"] { background: var(--pine); border-color: var(--pine); color: var(--on-pine); }
+.chip svg { width: 16px; height: 16px; }
+.dot { width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--line); display: inline-block; flex: none; }
+.reset { justify-self: start; background: none; border: none; color: var(--pine); font-weight: 600; cursor: pointer; padding: 0; font-size: 13.5px; text-decoration: underline; text-underline-offset: 3px; }
+
+/* results */
+.results-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+.results-head h2 { font-size: 22px; }
+.count { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 14px; }
+.card { text-align: left; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 12px; cursor: pointer; display: grid; gap: 10px; box-shadow: var(--shadow); transition: transform .15s ease, border-color .15s ease; position: relative; }
+.card:hover { transform: translateY(-2px); border-color: var(--pine); }
+.card-top { display: flex; align-items: center; gap: 10px; }
+.glyph { width: 40px; height: 40px; border-radius: 10px; background: var(--pine-soft); color: var(--pine); display: grid; place-items: center; flex: none; }
+.glyph svg { width: 26px; height: 26px; }
+.card-name { font-family: var(--f-display); font-size: 21px; font-weight: 700; line-height: 1.2; }
+.card-type { font-size: 12px; color: var(--muted); }
+.seen-badge { position: absolute; top: 10px; right: 10px; font-size: 11.5px; font-weight: 600; color: var(--pine); border: 1px solid var(--pine); border-radius: 999px; padding: 0 8px; background: var(--paper); }
+.label { border-top: 1px solid var(--line); padding-top: 8px; display: grid; gap: 6px; }
+.sci { font-family: var(--f-latin); font-style: italic; font-size: 15.5px; color: var(--muted); line-height: 1.25; }
+.fam { font-size: 12.5px; color: var(--muted); }
+.months { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; }
+.months span { height: 6px; border-radius: 2px; background: var(--line); }
+.months span.on { background: var(--pollen); }
+.months.big span { height: 22px; font-size: 11px; display: grid; place-items: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+.months.big span.on { color: var(--paper); font-weight: 600; }
+.card-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted); }
+.dots { display: inline-flex; gap: 4px; }
+.empty { background: var(--paper); border: 1px dashed var(--line); border-radius: 12px; padding: 28px; text-align: center; color: var(--muted); }
+
+/* info blocks */
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 36px; }
+.note { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.note h3 { font-size: 18px; margin-bottom: 8px; }
+.note ol, .note ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
+.note p { margin: 0; font-size: 14px; color: var(--muted); }
+footer { margin-top: 28px; font-size: 12.5px; color: var(--muted); }
+
+/* specimen sheet dialog */
+dialog { border: none; padding: 0; background: var(--paper); color: var(--ink); border-radius: 16px; width: min(760px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+dialog::backdrop { background: rgba(10, 18, 13, .55); }
+.sheet { padding: 24px; display: grid; gap: 18px; }
+.sheet-head { display: flex; gap: 14px; align-items: flex-start; }
+.sheet-head .glyph { width: 56px; height: 56px; }
+.sheet-head .glyph svg { width: 36px; height: 36px; }
+.sheet-title { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.sheet-title h2 { font-size: 32px; line-height: 1.15; }
+.sheet-title .sci { font-size: 19px; }
+.close { background: var(--bg); border: 1px solid var(--line); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 18px; flex: none; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 12.5px; border-radius: 999px; padding: 2px 10px; background: var(--pine-soft); color: var(--pine); font-weight: 500; }
+.sec-label { font-size: 12px; letter-spacing: .1em; color: var(--pine); font-weight: 600; margin-bottom: 4px; }
+.sheet-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+@media (max-width: 600px) { .sheet-grid { grid-template-columns: minmax(0, 1fr); } .sheet { padding: 18px; } .sheet-title h2 { font-size: 26px; } }
+.sheet-grid p { margin: 0; font-size: 14.5px; }
+.caution { background: var(--caution-bg); color: var(--caution-ink); border-radius: 10px; padding: 10px 14px; font-size: 14px; font-weight: 500; }
+.record { font-size: 13.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.record .sec-label { margin: 0; }
+.sources { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; font-size: 13.5px; }
+.sources a { color: var(--pine); word-break: break-all; }
+.checklist { background: var(--bg); border-radius: 12px; padding: 14px 16px; }
+.checklist ul { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 3px; font-size: 14px; }
+.sheet-foot { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 14px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 8px 14px; font-size: 14px; cursor: pointer; text-decoration: none; color: var(--ink); display: inline-flex; gap: 6px; align-items: center; }
+.btn:hover { border-color: var(--pine); }
+.btn.primary { background: var(--pine); color: var(--on-pine); border-color: var(--pine); font-weight: 600; }
+.nav { display: flex; gap: 8px; }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">춘양중학교 과학 · 우리 지역 식물 도감</div>
+    <h1>봉화 자생식물 도감</h1>
+    <p>봉화의 산과 계곡에서 실제로 조사·기록된 우리 식물 40종을 모았어요. 언제, 어디서 봤는지, 꽃은 무슨 색이었는지, 잎은 어떻게 생겼는지 고르면 이름을 찾을 수 있어요.</p>
+    <div class="stats" id="stats"></div>
+    <svg class="ridge" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 50 L70 34 L120 40 L190 18 L240 30 L300 12 L350 26 L420 8 L470 22 L540 16 L600 30 L660 10 L720 24 L780 6 L840 20 L900 14 L960 32 L1030 18 L1090 28 L1150 20 L1200 30 L1200 54 L0 54 Z" fill="currentColor" opacity=".14"/>
+      <path d="M0 50 L70 34 L120 40 L190 18 L240 30 L300 12 L350 26 L420 8 L470 22 L540 16 L600 30 L660 10 L720 24 L780 6 L840 20 L900 14 L960 32 L1030 18 L1090 28 L1150 20 L1200 30" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+  </header>
+
+  <div class="layout">
+    <aside class="finder" aria-label="찾기 도우미">
+      <h2>찾기 도우미</h2>
+      <p class="hint">기억나는 것만 골라도 돼요. 같은 질문 안에서는 여러 개를 고를 수 있어요.</p>
+      <input class="search" id="search" type="search" placeholder="이름으로 찾기 (예: 얼레지)" aria-label="식물 이름 검색">
+      <div class="q"><div class="q-label">언제 봤나요? <span class="fam">(꽃 피는 때)</span></div><div class="chips" id="f-season"></div></div>
+      <div class="q"><div class="q-label">어디서 봤나요?</div><div class="chips" id="f-hab"></div></div>
+      <div class="q"><div class="q-label">꽃은 무슨 색이었나요?</div><div class="chips" id="f-color"></div></div>
+      <div class="q"><div class="q-label">잎은 어떻게 생겼나요?</div><div class="chips" id="f-leaf"></div></div>
+      <div class="q"><div class="q-label">어떤 식물인가요?</div><div class="chips" id="f-type"></div></div>
+      <div class="q"><div class="q-label">내 관찰 기록</div><div class="chips" id="f-seen"></div></div>
+      <button class="reset" id="reset" type="button">조건 모두 지우기</button>
+    </aside>
+
+    <main>
+      <div class="results-head">
+        <h2 id="results-title">모든 식물</h2>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="grid" id="grid"></div>
+
+      <section class="notes" aria-label="도움말">
+        <div class="note">
+          <h3>식물 도감 과제에 쓰는 법</h3>
+          <ol>
+            <li>학교 주변이나 마을 뒷산에서 식물을 직접 찾아 사진을 찍어요.</li>
+            <li>찾기 도우미로 이름을 확인하고, 카드의 관찰 포인트로 잎과 줄기를 다시 살펴봐요.</li>
+            <li>광합성 포인트를 참고해 내 식물의 특징을 광합성과 연결해 봐요.</li>
+            <li>출처는 국가생물종지식정보시스템이나 식물도감 책에서 2개 이상 찾아 적어요.</li>
+          </ol>
+        </div>
+        <div class="note">
+          <h3>관찰 약속</h3>
+          <ul>
+            <li>식물은 캐거나 꺾지 말고 사진과 그림으로 기록해요.</li>
+            <li>모르는 식물은 맛보지 않아요. 독이 있는 식물이 많아요.</li>
+            <li>산에서는 정해진 길로 다니고, 혼자 가지 않아요.</li>
+            <li>남의 산에서 산나물을 허락 없이 캐는 것은 법으로 금지돼 있어요.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <h3>더 많은 식물을 보려면</h3>
+          <p>춘양면 국립백두대간수목원 숲에는 ‘금강소나무’로 기록된 소나무가 자라요. 수목원에서는 백두대간의 다양한 자생식물을 이름표와 함께 볼 수 있어요. 청량산과 태백산 자락의 숲길도 좋은 관찰 장소예요.</p>
+        </div>
+      </section>
+      <section class="note" style="margin-top:14px" aria-label="자료 출처">
+        <h3>어떻게 고른 식물인가요?</h3>
+        <p>아래 두 조사 논문의 봉화 지역 식물 목록에 실린 식물 중에서 학생들이 쉽게 만나고 관찰하기 좋은 40종을 골랐어요. 식물마다 어느 조사에서 기록되었는지 상세 화면에 적어 두었어요. 도감 과제의 출처로 이 논문을 쓸 수 있어요.</p>
+        <ol class="sources">
+          <li>남보미 외 (2015). 청량산(봉화군, 안동시)의 관속식물상. 한국자원식물학회지 28(5): 616–634. <a href="https://doi.org/10.7732/kjpr.2015.28.5.616" target="_blank" rel="noopener">doi.org/10.7732/kjpr.2015.28.5.616</a></li>
+          <li>변준기 외 (2016). 국립백두대간수목원 내 산림유전자원보호구역의 관속식물상. 한국자원식물학회지 29(2): 204–224. <a href="https://doi.org/10.7732/kjpr.2016.29.2.204" target="_blank" rel="noopener">doi.org/10.7732/kjpr.2016.29.2.204</a></li>
+        </ol>
+      </section>
+      <footer>꽃 피는 때와 사는 곳은 해마다, 산의 높이에 따라 조금씩 달라요. 더 자세한 정보는 국가생물종지식정보시스템(nature.go.kr)에서 확인하세요.</footer>
+    </main>
+  </div>
+</div>
+
+<dialog id="sheet" aria-labelledby="sheet-name"></dialog>
+
+<script>
+const LEAF = {
+  needle:   { label: '바늘잎', svg: '<path d="M12 22v-7M12 15 7.5 2.5M12 15l4.5-12.5"/>' },
+  oval:     { label: '둥근·타원 잎', svg: '<path d="M12 2.5C5.5 7 5.5 16.5 12 21.5 18.5 16.5 18.5 7 12 2.5Z"/><path d="M12 5v17"/>' },
+  narrow:   { label: '가늘고 긴 잎', svg: '<path d="M12 1.5C9.6 8 9.6 15 12 22.5 14.4 15 14.4 8 12 1.5Z"/><path d="M12 4v18.5"/>' },
+  heart:    { label: '심장 모양 잎', svg: '<path d="M12 4.5C10.5 2.5 6 2.5 5 6.5 4 11 8 15.5 12 18.5 16 15.5 20 11 19 6.5 18 2.5 13.5 2.5 12 4.5Z"/><path d="M12 4.5V22"/>' },
+  lobed:    { label: '갈라진 잎', svg: '<path d="M12 22v-8.5"/><path d="M12 13.5C8.5 13.5 3.5 11.5 3.5 7.5 6 9 8.5 9.2 10 8.3 8.8 6.2 9.6 3.2 12 1.8 14.4 3.2 15.2 6.2 14 8.3 15.5 9.2 18 9 20.5 7.5 20.5 11.5 15.5 13.5 12 13.5Z"/>' },
+  compound: { label: '작은잎이 여럿 (겹잎)', svg: '<path d="M12 22.5V3"/><ellipse cx="12" cy="3.2" rx="1.6" ry="2.4"/><ellipse cx="8" cy="7" rx="3" ry="1.5" transform="rotate(-25 8 7)"/><ellipse cx="16" cy="7" rx="3" ry="1.5" transform="rotate(25 16 7)"/><ellipse cx="8" cy="12" rx="3" ry="1.5" transform="rotate(-25 8 12)"/><ellipse cx="16" cy="12" rx="3" ry="1.5" transform="rotate(25 16 12)"/><ellipse cx="8" cy="17" rx="3" ry="1.5" transform="rotate(-25 8 17)"/><ellipse cx="16" cy="17" rx="3" ry="1.5" transform="rotate(25 16 17)"/>' }
+};
+const leafSvg = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LEAF[k].svg}</svg>`;
+
+const COLOR = { white: '흰색', yellow: '노랑', pink: '분홍', red: '붉은색', purple: '보라·자주', blue: '파랑', orange: '주황', green: '눈에 띄는 꽃 없음' };
+const HAB = { forest: '숲속 그늘', edge: '숲 가장자리·산길', sunny: '햇볕 드는 풀밭·양지', water: '물가·계곡', ridge: '높은 산·능선', village: '마을·길가' };
+const TYPE = ['나무', '덩굴', '풀', '양치식물'];
+const SEASON = { spring: ['봄', [3,4,5]], summer: ['여름', [6,7,8]], autumn: ['가을', [9,10,11]], winter: ['겨울·이른 봄', [12,1,2]] };
+
+// [이름, 학명, 과, 종류, 꽃 피는 달, 꽃 색, 잎 모양, 사는 곳, 잎의 특징, 잎 이외의 구조, 광합성·생활 포인트, 이야기, 주의]
+const RAW = [
+['소나무 (춘양목)','Pinus densiflora','소나무과','나무',[5],['green'],'needle',['ridge','sunny','village'],
+ '바늘잎이 2개씩 묶여 나요. 잎은 2~3년 동안 달려 있다가 떨어져요.',
+ '줄기 아랫부분 껍질은 거북 등처럼 갈라지고 윗부분은 붉은빛이에요. 5월에 노란 꽃가루(송화)가 바람에 날려요.',
+ '늘푸른 바늘잎이라 겨울에도 날이 따뜻하면 광합성을 해요. 잎이 가늘고 겉이 두꺼워 물이 덜 빠져나가요.',
+ '춘양 일대의 곧고 단단한 금강소나무는 춘양역에 모였다가 전국으로 옮겨져 ‘춘양목’이라 불렸어요. 소나무 숲 아래에서 봉화 송이버섯이 자라요.',''],
+['신갈나무','Quercus mongolica','참나무과','나무',[5],['green'],'oval',['ridge','forest'],
+ '잎 가장자리에 물결 모양의 큰 톱니가 있고, 잎자루가 거의 없어요.',
+ '가을에 도토리가 열려요. 도토리 모자(깍정이)에 비늘 같은 돌기가 덮여 있어요.',
+ '높은 산에서 넓은 잎을 펼쳐 숲의 지붕을 만들어요. 광합성으로 만든 양분은 도토리에 녹말로 저장돼요.',
+ '옛날 짚신 바닥에 잎을 깔았다고 ‘신갈’이라는 이름이 붙었다고 전해져요. 경북 북부 높은 산에서 가장 흔한 참나무예요.',''],
+['굴참나무','Quercus variabilis','참나무과','나무',[5],['green'],'oval',['sunny','edge'],
+ '길쭉한 잎 가장자리에 바늘 같은 톱니가 있고, 뒷면은 잔털이 많아 희끗해요.',
+ '줄기 껍질에 코르크층이 두껍게 발달해 손으로 누르면 푹신해요.',
+ '두꺼운 코르크 껍질이 산불과 추위로부터 줄기 속 물관과 체관을 보호해요.',
+ '두꺼운 껍질(굴피)을 벗겨 지붕을 덮은 집을 ‘굴피집’이라고 해요.',''],
+['생강나무','Lindera obtusiloba','녹나무과','나무',[3],['yellow'],'lobed',['edge','forest'],
+ '잎 윗부분이 3갈래로 갈라지기도 해요. 잎이나 가지를 비비면 생강 냄새가 나요.',
+ '3월, 잎보다 먼저 작은 노란 꽃이 가지에 뭉쳐 피어요. 가을에는 잎이 노랗게 물들어요.',
+ '꽃이 잎보다 먼저 피니까, 이른 봄 꽃을 피울 때는 지난해 광합성으로 만들어 줄기에 저장해 둔 양분을 써요.',
+ '마을의 산수유와 헷갈리기 쉬운데, 생강나무는 산에서 자라고 꽃자루가 아주 짧아요. 김유정 소설 「동백꽃」의 ‘노란 동백꽃’이 바로 생강나무예요.',''],
+['진달래','Rhododendron mucronulatum','진달래과','나무',[4],['pink'],'oval',['ridge','sunny'],
+ '긴 타원형 잎이 어긋나게 나고, 꽃이 진 뒤에 나와요.',
+ '4월에 잎보다 꽃이 먼저 연분홍으로 피어요. 수술이 10개예요.',
+ '잎이 나기 전 꽃을 피우는 데 저장 양분을 쓰고, 꽃이 진 뒤 나온 잎이 다시 양분을 만들어 저장해요.',
+ '꽃을 먹을 수 있어 ‘참꽃’이라고도 불렀어요. 진달래가 지고 한 달쯤 뒤에 비슷한 철쭉이 피어요.',''],
+['철쭉','Rhododendron schlippenbachii','진달래과','나무',[5],['pink'],'oval',['ridge','forest'],
+ '달걀을 거꾸로 세운 모양의 잎이 가지 끝에 5장씩 모여 나요.',
+ '5월에 잎과 꽃이 함께 피어요. 꽃 안쪽 위쪽에 붉은 갈색 점이 있어요.',
+ '잎과 꽃이 함께 나오기 때문에 꽃을 피우는 동안에도 잎에서 광합성을 해요.',
+ '진달래와 달리 먹을 수 없어서 ‘개꽃’이라고도 불렀어요.',
+ '독성이 있어요. 꽃과 잎을 먹지 마세요.'],
+['산벚나무','Prunus sargentii','장미과','나무',[4,5],['pink'],'oval',['forest','edge'],
+ '가장자리에 날카로운 톱니가 있는 타원형 잎이에요. 새잎은 붉은빛을 띠어요.',
+ '줄기 껍질에 가로로 긴 껍질눈이 있어요. 6~7월에 검붉은 버찌가 익어요.',
+ '줄기의 껍질눈은 기체가 드나드는 통로예요. 잎의 기공과 함께 살펴보면 좋아요.',
+ '마을의 왕벚나무와 달리 꽃과 붉은 새잎이 함께 나와요. 봄 산 중턱이 연분홍 점처럼 물들면 산벚나무예요.',''],
+['함박꽃나무','Magnolia sieboldii','목련과','나무',[5,6],['white'],'oval',['water','forest'],
+ '넓은 타원형 잎이 크고 부드러우며 뒷면은 흰빛이 돌아요.',
+ '5~6월에 향기로운 흰 꽃이 옆이나 아래를 향해 피어요. 가운데 붉은 수술 다발이 눈에 띄어요.',
+ '계곡 주변 숲속의 약한 빛도 넓은 잎으로 넉넉히 받아요.',
+ '‘산목련’이라고도 불러요. 산길에서 은은한 꽃향기가 나면 주변을 살펴보세요.',''],
+['층층나무','Cornus controversa','층층나무과','나무',[5,6],['white'],'oval',['forest','water'],
+ '넓은 달걀 모양 잎이 가지 끝에 어긋나게 모여 나요. 잎맥이 잎 끝 쪽으로 활처럼 휘어져요.',
+ '가지가 줄기에서 돌려나듯 뻗어 층층이 계단처럼 퍼져요. 5~6월에 작은 흰 꽃이 평평하게 모여 피어요.',
+ '가지를 층층이 수평으로 펼쳐, 아래층 잎과 위층 잎이 덜 겹치게 빛을 받아요.',
+ '멀리서 봐도 나뭇가지가 층을 이룬 모습이 뚜렷해서 이름도 ‘층층나무’예요. 가을에 검은 열매를 새들이 먹어요.',''],
+['물푸레나무','Fraxinus rhynchophylla','물푸레나무과','나무',[5],['green'],'compound',['water','forest'],
+ '작은잎 5~7장이 깃털처럼 마주 붙은 깃꼴겹잎이에요. 작은잎 여러 장이 모여 잎 한 장이 돼요.',
+ '열매에 납작한 날개가 달려 바람을 타고 날아가요.',
+ '계곡의 물기 많은 땅에서 물을 넉넉히 끌어올려 광합성 재료로 써요.',
+ '어린 가지 껍질을 물에 담그면 물이 푸르게 변해 ‘물푸레’예요. 단단해서 옛날 농기구 자루로 썼어요.',''],
+['다래','Actinidia arguta','다래나무과','덩굴',[5,6],['white'],'oval',['edge','water'],
+ '넓은 달걀 모양 잎 가장자리에 잔톱니가 있어요.',
+ '줄기가 다른 나무를 감고 올라가요. 9~10월에 작은 초록 열매가 말랑하게 익어요.',
+ '덩굴줄기로 다른 나무를 타고 올라가, 숲 위쪽 밝은 곳에 잎을 펼쳐 빛을 차지해요.',
+ '키위와 같은 무리(다래나무속)라서 열매를 자르면 속이 닮았어요.',''],
+['으름덩굴','Akebia quinata','으름덩굴과','덩굴',[4,5],['purple'],'compound',['edge'],
+ '작은잎 5장이 손바닥처럼 둥글게 모여 난 손바닥겹잎이에요.',
+ '4~5월에 자줏빛 꽃이 피고, 가을에 바나나처럼 생긴 열매가 세로로 벌어져요.',
+ '열매 속 하얀 과육이 달아요. 광합성으로 만든 양분이 당의 형태로 열매에 저장된 거예요.',
+ '‘한국의 바나나’라는 별명이 있어요.',''],
+['두릅나무','Aralia elata','두릅나무과','나무',[8,9],['white'],'compound',['edge','sunny'],
+ '작은잎이 여러 번 깃꼴로 나뉜 아주 큰 겹잎이에요. 잎 한 장이 1m 가까이 되기도 해요.',
+ '줄기와 잎자루에 날카로운 가시가 많아요. 8~9월에 작고 흰 꽃이 우산처럼 모여 피어요.',
+ '봄에 줄기 끝 새순이 빠르게 자라는 건 지난해 저장해 둔 양분 덕분이에요.',
+ '봄에 따는 새순이 바로 ‘두릅’ 나물이에요.',
+ '가시에 찔리지 않게 조심하세요.'],
+['겨우살이','Viscum coloratum','단향과','나무',[3,4],['yellow'],'narrow',['ridge','forest'],
+ '두껍고 길쭉한 잎이 가지 끝에 2장씩 마주 나고, 겨울에도 초록이에요.',
+ '참나무 같은 큰 나무의 높은 가지에 새 둥지처럼 둥글게 붙어 살아요. 겨울에 노란 열매가 열려요.',
+ '다른 나무에서 물과 무기양분을 빼앗아 쓰지만, 초록 잎으로 광합성은 스스로 해요. 이런 식물을 ‘반기생식물’이라고 해요.',
+ '잎이 떨어진 겨울 숲에서 가장 잘 보여요. 새가 끈적한 열매를 먹고 다른 가지에 씨를 옮겨요.',''],
+['산수국','Hydrangea serrata','수국과','나무',[6,7],['blue','purple'],'oval',['water','forest'],
+ '가장자리에 톱니가 있는 타원형 잎이 마주 나요.',
+ '가운데 작은 진짜 꽃(유성화)을 가장자리의 큰 헛꽃(무성화)이 둘러싸요.',
+ '계곡 옆 축축한 그늘에서도 넓은 잎으로 빛을 모아요.',
+ '헛꽃은 씨를 맺지 못하지만 곤충을 불러 모으는 간판 역할을 해요. 흙의 성질에 따라 꽃 색이 푸르거나 분홍빛으로 달라져요.',''],
+['너도바람꽃','Eranthis stellata','미나리아재비과','풀',[3,4],['white'],'lobed',['forest','water'],
+ '잎이 손바닥처럼 3갈래로 깊게 갈라지고, 갈래가 다시 잘게 갈라져요.',
+ '이른 봄 숲속 계곡가에 하얀 꽃이 피어요. 꽃잎처럼 보이는 흰 것은 꽃받침이고, 진짜 꽃잎은 끝이 갈라진 노란 꿀샘으로 바뀌었어요.',
+ '나무에 잎이 나기 전, 숲 바닥까지 햇빛이 드는 짧은 기간에 서둘러 광합성을 해요. 여름이 오기 전에 땅 위 부분은 사라지고 땅속 덩이줄기로 지내요.',
+ '바람꽃 무리를 닮았다고 ‘너도바람꽃’이에요. 청량산 조사에서 기록된 이른 봄꽃이에요.',''],
+['노루귀','Hepatica asiatica','미나리아재비과','풀',[3,4],['white','pink','purple'],'lobed',['forest'],
+ '잎이 3갈래로 갈라지고, 새로 나는 잎이 털에 덮여 노루 귀처럼 보여요.',
+ '꽃줄기에 흰 털이 보송보송해요. 꽃잎처럼 보이는 것은 사실 꽃받침이에요.',
+ '봄에 숲 바닥이 밝을 때 꽃을 피우고, 뒤이어 나온 잎으로 광합성해 뿌리에 양분을 저장해요.',
+ '같은 노루귀라도 꽃 색이 흰색, 분홍, 보라로 다양해요.',''],
+['얼레지','Erythronium japonicum','백합과','풀',[4],['purple'],'oval',['forest','ridge'],
+ '넓은 잎 2장에 자줏빛 얼룩무늬가 있어요. 얼룩덜룩해서 ‘얼레지’예요.',
+ '꽃잎이 뒤로 활짝 젖혀져요. 땅속 깊이 비늘줄기가 있어요.',
+ '봄 한철 광합성으로 만든 양분을 땅속 비늘줄기에 녹말로 저장해요. 옛날엔 이 녹말을 얻어 쓰기도 했어요.',
+ '씨앗에 붙은 영양 덩어리를 좋아하는 개미가 씨를 옮겨 줘요. 씨가 싹터서 꽃이 피기까지 여러 해가 걸려요.',''],
+['현호색','Corydalis remota','양귀비과','풀',[4],['blue','purple'],'lobed',['forest','water'],
+ '잎이 여러 번 갈라져 작은 조각으로 나뉘어요.',
+ '꽃 뒤쪽에 꿀을 담는 주머니(거)가 길게 튀어나와요. 땅속에 둥근 덩이줄기가 있어요.',
+ '땅속 덩이줄기에 양분을 저장했다가 이른 봄 빠르게 싹을 틔워요.',
+ '습한 숲 가장자리에 무리 지어 피어요. 꽃 모양이 종달새 머리를 닮았다고 해요.',''],
+['할미꽃','Pulsatilla koreana','미나리아재비과','풀',[4],['red'],'compound',['sunny'],
+ '깃꼴겹잎이고 잎 전체에 흰 털이 많아요.',
+ '꽃이 고개를 숙이고 피어요. 꽃이 지면 흰 털이 달린 열매가 할머니 흰머리처럼 보여요.',
+ '햇볕이 잘 드는 양지에서 자라요. 키 큰 풀이나 나무에 가려 그늘이 지면 잘 자라지 못해요.',
+ '햇빛이 잘 드는 무덤가에서 자주 보여요. 털 달린 씨는 바람을 타고 퍼져요.',
+ '독성이 있어요. 맛보지 말고, 만진 뒤에는 손을 씻어요.'],
+['제비꽃','Viola mandshurica','제비꽃과','풀',[4,5],['purple'],'narrow',['village','sunny'],
+ '길쭉한 잎이 뿌리에서 모여 나고, 잎자루에 좁은 날개가 있어요.',
+ '줄기 없이 뿌리에서 꽃자루가 올라와요. 꽃 뒤쪽에 꿀주머니가 있어요.',
+ '키가 작아서, 다른 풀이 크게 자라 그늘을 만들기 전 봄 햇빛을 먼저 받아요.',
+ '제비가 돌아올 무렵 핀다고 ‘제비꽃’이에요. 씨는 개미가 옮겨요.',''],
+['애기똥풀','Chelidonium majus var. asiaticum','양귀비과','풀',[5,6,7,8],['yellow'],'lobed',['village','edge'],
+ '잎이 깃꼴로 깊게 갈라지고, 뒷면은 흰빛이 돌아요.',
+ '줄기를 꺾으면 노란 즙이 나와요. 꽃잎은 4장이에요.',
+ '길가나 빈터처럼 빛이 많은 곳에서 봄부터 여름까지 빠르게 자라요.',
+ '노란 즙이 아기 똥 색을 닮아 붙은 이름이에요.',
+ '즙에 독성이 있어요. 맛보거나 눈에 닿지 않게 하세요.'],
+['은방울꽃','Convallaria keiskei','백합과','풀',[5],['white'],'oval',['forest'],
+ '넓은 타원형 잎 2장이 꽃줄기를 감싸요. 잎맥이 나란히맥이에요.',
+ '5월에 하얀 종 모양 꽃이 한쪽으로 줄지어 달리고 향기가 좋아요. 가을에 붉은 열매가 열려요.',
+ '나란히맥 잎은 외떡잎식물의 특징이에요. 땅속줄기에 양분을 저장하며 옆으로 퍼져 무리를 이뤄요.',
+ '숲속에 무리 지어 피어 있으면 은방울 소리가 날 것 같은 모양이에요.',
+ '식물 전체에 강한 독이 있어요. 비슷한 산나물과 헷갈려 사고가 나기도 해요.'],
+['둥굴레','Polygonatum odoratum var. pluriflorum','백합과','풀',[5,6],['white'],'oval',['forest','edge'],
+ '타원형 잎이 줄기에 어긋나며 한쪽으로 나란히 나요. 잎맥은 나란히맥이에요.',
+ '잎겨드랑이에 초록빛이 도는 흰 종 모양 꽃이 1~2개씩 매달려요. 땅속줄기가 옆으로 길게 뻗어요.',
+ '광합성으로 만든 양분을 굵은 땅속줄기에 저장해요. 이 땅속줄기를 볶아 둥굴레차를 만들어요.',
+ '줄기가 활처럼 휘어 꽃이 땅을 바라보며 피어요.',''],
+['원추리','Hemerocallis fulva','백합과','풀',[7,8],['orange'],'narrow',['sunny','village'],
+ '칼처럼 가늘고 긴 잎이 두 줄로 포개져 나와요. 잎맥은 나란히맥이에요.',
+ '주황색 꽃 하나는 하루만 피었다 지고, 다음 날 다른 꽃봉오리가 피어요.',
+ '뿌리 일부가 덩이처럼 굵어져 양분을 저장하고, 해마다 그 자리에서 다시 자라요.',
+ '근심을 잊게 해 준다고 ‘망우초’라고도 불렀어요.',''],
+['참나리','Lilium lancifolium','백합과','풀',[7,8],['orange'],'narrow',['sunny','village'],
+ '좁고 긴 잎이 줄기에 촘촘히 어긋나요.',
+ '주황 꽃잎에 검은 점이 많고 뒤로 말려요. 잎겨드랑이에 까만 콩 같은 살눈(주아)이 달려요.',
+ '땅속 비늘줄기에 양분을 저장해요. 살눈이 땅에 떨어지면 새 포기로 자라요.',
+ '씨 대신 살눈으로도 번식하는 신기한 식물이에요.',''],
+['일월비비추','Hosta capitata','백합과','풀',[7,8],['purple'],'heart',['water','forest'],
+ '밑부분이 심장 모양인 넓은 달걀형 잎에 굵은 잎맥이 나란히 휘어져 있어요.',
+ '긴 꽃줄기 끝에 보라색 꽃이 머리처럼 둥글게 모여 피어요.',
+ '넓고 큰 잎 덕분에 계곡 옆 그늘에서도 광합성에 필요한 빛을 충분히 받아요.',
+ '이웃 지역인 영양 일월산의 이름이 붙은 비비추예요. 꽃이 한쪽으로 줄지어 피는 비비추와 달리 둥글게 모여 피어요.',''],
+['동자꽃','Lychnis cognata','석죽과','풀',[7,8],['orange'],'oval',['ridge','forest'],
+ '긴 타원형 잎이 줄기에 마주 나요.',
+ '주황색 꽃잎 5장의 끝이 얕게 갈라져요. 줄기 마디가 볼록해요.',
+ '높은 산 숲 가장자리의 밝은 곳에서 자라요.',
+ '산속 암자에서 스님을 기다리다 숨진 동자의 전설이 이름에 담겨 있어요.',''],
+['노루오줌','Astilbe rubra','범의귀과','풀',[7,8],['pink'],'compound',['water'],
+ '작은잎 여러 장이 모인 겹잎이고 가장자리에 톱니가 있어요.',
+ '분홍색 작은 꽃이 원뿔 모양으로 빽빽하게 모여 피어요.',
+ '습한 계곡 주변에서 물을 넉넉히 받아 여름 내내 잎을 펼쳐요.',
+ '뿌리에서 노루 오줌 같은 냄새가 난다고 붙은 이름이에요.',''],
+['고사리','Pteridium aquilinum var. latiusculum','잔고사리과','양치식물',[4,5],['green'],'compound',['sunny','edge'],
+ '잎이 여러 번 깃꼴로 갈라진 큰 잎이에요. 어린잎은 주먹처럼 돌돌 말려 나와요.',
+ '꽃과 씨가 없어요. 잎 뒷면 가장자리에 생기는 포자로 번식해요. (달력은 새순이 나는 때예요.)',
+ '꽃이 피지 않아도 엽록체가 있어 광합성을 해요. 땅속줄기에 양분을 저장해요.',
+ '봄에 돌돌 말린 어린순을 꺾어 나물로 먹어요.',
+ '날것에는 독성이 있어서 반드시 삶아서 먹어요.'],
+['곰취','Ligularia fischeri','국화과','풀',[7,8,9],['yellow'],'heart',['ridge','water'],
+ '커다란 심장 모양 잎에 잎자루가 길어요.',
+ '여름에 노란 꽃이 꽃줄기 위쪽에 여러 송이 피어요.',
+ '높은 산의 축축하고 서늘한 곳에서 넓은 잎으로 빛을 모아요.',
+ '높은 산에서 나는 대표 산나물로 향이 진해요.',
+ '독이 있는 동의나물과 잎이 비슷해서 함부로 캐 먹으면 위험해요.'],
+['참취','Aster scaber','국화과','풀',[8,9,10],['white'],'heart',['edge'],
+ '심장 모양 잎 가장자리에 굵은 톱니가 있고 잎자루가 길어요.',
+ '가을에 작은 흰 꽃이 가지 끝에 우산 모양으로 모여 피어요.',
+ '봄에는 뿌리에서 난 큰 잎으로 광합성하고, 여름부터 꽃대를 높이 세워요.',
+ '‘취나물’로 많이 먹는 나물이에요.',''],
+['구절초','Chrysanthemum zawadskii var. latilobum','국화과','풀',[9,10],['white','pink'],'lobed',['ridge','sunny'],
+ '잎이 깃꼴로 갈라지고 갈래 끝이 둥글어요.',
+ '흰색이나 연분홍 꽃이 한 줄기에 한 송이씩 피어요. 땅속줄기가 옆으로 뻗어요.',
+ '햇볕이 잘 드는 능선에서 자라요. 땅속줄기에 저장한 양분으로 이듬해 다시 싹을 틔워요.',
+ '음력 9월 9일 무렵 꺾어 약으로 썼다는 데서 이름이 왔다고 해요.',''],
+['까실쑥부쟁이','Aster ageratoides','국화과','풀',[8,9,10],['purple','white'],'narrow',['edge','sunny'],
+ '길쭉한 잎 가장자리에 톱니가 있고, 만지면 까끌까끌해요. 잎맥 3개가 뚜렷해요.',
+ '연보라나 흰색 꽃 한 송이처럼 보이지만, 실제로는 작은 꽃 여러 개가 모인 머리모양꽃차례예요.',
+ '겨울엔 땅 위 부분이 시들고, 땅속줄기의 양분으로 봄에 다시 싹이 터요.',
+ '잎이 까칠해서 ‘까실’쑥부쟁이예요. 흔히 ‘들국화’라고 부르는 꽃 중 하나예요.',''],
+['산국','Chrysanthemum boreale','국화과','풀',[9,10],['yellow'],'lobed',['edge','sunny'],
+ '잎이 깃꼴로 깊게 갈라지고 갈래 끝이 뾰족해요.',
+ '지름 1.5cm쯤 되는 작은 노란 꽃이 많이 모여 피고 향이 진해요.',
+ '다른 풀들이 시드는 늦가을까지 잎과 꽃을 유지해요.',
+ '비슷한 감국은 꽃이 조금 더 커요.',''],
+['억새','Miscanthus sinensis','벼과','풀',[9,10],['green'],'narrow',['sunny','ridge'],
+ '길고 좁은 잎 가장자리가 톱날처럼 날카롭고, 가운데 흰 줄(주맥)이 뚜렷해요.',
+ '가을에 은빛 이삭이 바람에 흔들려요. 씨에 털이 달려 바람에 날아가요.',
+ '억새는 덥고 밝은 곳에서 광합성을 효율적으로 하는 특별한 방식(C4 광합성)을 써요.',
+ '산에는 억새, 물가에는 갈대예요. 헷갈리면 사는 곳을 보세요.',
+ '잎 가장자리에 손을 베일 수 있어요.'],
+['투구꽃','Aconitum jaluense','미나리아재비과','풀',[9],['purple'],'lobed',['forest'],
+ '손바닥처럼 3~5갈래로 깊게 갈라진 잎이에요.',
+ '보라색 꽃이 옛날 병사의 투구처럼 생겼어요.',
+ '숲속 그늘에서 갈라진 잎을 넓게 펼쳐 빛을 받아요.',
+ '가을 숲에서 눈에 띄는 보라색 꽃이에요.',
+ '아주 강한 독이 있어요. 만지지도, 맛보지도 마세요.'],
+['꽃향유','Elsholtzia splendens','꿀풀과','풀',[9,10],['purple'],'oval',['sunny','edge'],
+ '달걀 모양 잎이 마주 나고, 비비면 진한 향이 나요.',
+ '줄기가 네모나요. 자주색 꽃이 꽃대의 한쪽 방향으로만 빽빽하게 피어요.',
+ '꽃이 적은 늦가을에 피어 벌과 나비에게 귀한 꿀을 줘요.',
+ '꿀풀과 식물은 줄기가 네모나고 잎이 마주 나요. 다른 꿀풀과 식물과 비교해 보세요.',''],
+['물봉선','Impatiens textorii','봉선화과','풀',[8,9],['pink'],'oval',['water'],
+ '넓은 타원형 잎 가장자리에 잔톱니가 있어요.',
+ '줄기가 물기를 머금어 통통하고 마디가 볼록해요. 홍자색 꽃 뒤쪽이 돌돌 말려 있어요.',
+ '물가의 축축한 땅에서 물을 넉넉히 빨아올려요. 줄기 속이 물로 차 있어 꼿꼿이 서요.',
+ '익은 열매를 건드리면 톡 터지며 씨가 멀리 튀어 나가요.',''],
+['용담','Gentiana scabra','용담과','풀',[9,10],['blue'],'narrow',['sunny','ridge'],
+ '끝이 뾰족한 피침형 잎이 줄기에 마주 나요.',
+ '종 모양의 푸른 보라색 꽃이 피어요.',
+ '해가 비칠 때만 꽃이 벌어지고, 흐리거나 밤이면 꽃이 닫혀요.',
+ '뿌리가 아주 써서 용의 쓸개처럼 쓰다는 뜻의 이름이 붙었어요.','']
+];
+const ONLY_C = ['으름덩굴','은방울꽃','구절초','꽃향유','너도바람꽃'];
+const ONLY_B = ['산벚나무','함박꽃나무','겨우살이','얼레지','현호색','곰취'];
+const SRC_NAME = { C: '청량산 관속식물상 조사 (2015)', B: '국립백두대간수목원 보호구역 관속식물상 조사 (2016)' };
+const PLANTS = RAW.map((r, i) => ({ src: ONLY_C.includes(r[0]) ? ['C'] : ONLY_B.includes(r[0]) ? ['B'] : ['C','B'], id: i, n: r[0], sci: r[1], fam: r[2], type: r[3], m: r[4], col: r[5], leaf: r[6], hab: r[7], leafTxt: r[8], part: r[9], ps: r[10], story: r[11], warn: r[12] }));
+
+const NOW_M = new Date().getMonth() + 1;
+const state = { q: '', season: new Set(), hab: new Set(), color: new Set(), leaf: new Set(), type: new Set(), seen: new Set() };
+
+let seen = {};
+try { seen = JSON.parse(localStorage.getItem('bonghwa-seen') || '{}') || {}; } catch (e) { seen = {}; }
+const saveSeen = () => { try { localStorage.setItem('bonghwa-seen', JSON.stringify(seen)); } catch (e) {} };
+
+const $ = id => document.getElementById(id);
+const dot = c => `<span class="dot" style="background:var(--fl-${c})"></span>`;
+const monthsHtml = (m, big) => `<div class="months${big ? ' big' : ''}" aria-label="꽃 피는 때: ${m.join(', ')}월">${Array.from({ length: 12 }, (_, i) => `<span class="${m.includes(i + 1) ? 'on' : ''}">${big ? i + 1 : ''}</span>`).join('')}</div>`;
+
+function chipGroup(el, key, items) {
+  el.innerHTML = items.map(([v, label, extra]) => `<button type="button" class="chip" data-key="${key}" data-v="${v}" aria-pressed="false">${extra || ''}${label}</button>`).join('');
+}
+chipGroup($('f-season'), 'season', [['now', `이번 달 (${NOW_M}월)`], ...Object.entries(SEASON).map(([k, v]) => [k, v[0]])]);
+chipGroup($('f-hab'), 'hab', Object.entries(HAB));
+chipGroup($('f-color'), 'color', Object.entries(COLOR).map(([k, v]) => [k, v, dot(k)]));
+chipGroup($('f-leaf'), 'leaf', Object.entries(LEAF).map(([k, v]) => [k, v.label, leafSvg(k)]));
+chipGroup($('f-type'), 'type', TYPE.map(t => [t, t]));
+chipGroup($('f-seen'), 'seen', [['yes', '직접 본 식물'], ['no', '아직 못 본 식물']]);
+
+document.querySelector('.finder').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  const set = state[b.dataset.key], v = b.dataset.v;
+  if (b.dataset.key === 'seen') { const on = !set.has(v); set.clear(); if (on) set.add(v); }
+  else set.has(v) ? set.delete(v) : set.add(v);
+  render();
+});
+$('search').addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
+$('reset').addEventListener('click', () => { Object.values(state).forEach(s => s instanceof Set && s.clear()); state.q = ''; $('search').value = ''; render(); });
+
+function matches(p) {
+  if (state.q && !(p.n + p.sci + p.fam).toLowerCase().includes(state.q.toLowerCase())) return false;
+  if (state.season.size) {
+    const months = [...state.season].flatMap(s => s === 'now' ? [NOW_M] : SEASON[s][1]);
+    if (!p.m.some(m => months.includes(m))) return false;
+  }
+  if (state.hab.size && !p.hab.some(h => state.hab.has(h))) return false;
+  if (state.color.size && !p.col.some(c => state.color.has(c))) return false;
+  if (state.leaf.size && !state.leaf.has(p.leaf)) return false;
+  if (state.type.size && !state.type.has(p.type)) return false;
+  if (state.seen.has('yes') && !seen[p.id]) return false;
+  if (state.seen.has('no') && seen[p.id]) return false;
+  return true;
+}
+
+let shown = [];
+function render() {
+  document.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', state[b.dataset.key].has(b.dataset.v)));
+  shown = PLANTS.filter(matches);
+  const filtered = shown.length !== PLANTS.length;
+  $('results-title').textContent = filtered ? '이 식물일지도 몰라요' : '모든 식물';
+  $('count').textContent = `${PLANTS.length}종 중 ${shown.length}종`;
+  $('grid').innerHTML = shown.length ? shown.map(p => `
+    <button type="button" class="card" data-id="${p.id}">
+      ${seen[p.id] ? '<span class="seen-badge">봤어요</span>' : ''}
+      <div class="card-top">
+        <span class="glyph" title="${LEAF[p.leaf].label}">${leafSvg(p.leaf)}</span>
+        <div><div class="card-name">${p.n}</div><div class="card-type">${p.type} · ${p.hab.map(h => HAB[h]).join(', ')}</div></div>
+      </div>
+      <div class="label">
+        <div class="sci">${p.sci}</div>
+        ${monthsHtml(p.m)}
+        <div class="card-meta"><span>${p.fam}</span><span class="dots" title="꽃 색">${p.col.map(dot).join('')}</span></div>
+      </div>
+    </button>`).join('') : `<div class="empty">조건에 맞는 식물이 없어요. 조건을 하나씩 빼 보세요.<br>꽃 색이나 피는 때는 사람마다 다르게 볼 수 있어요.</div>`;
+  const seenCount = Object.keys(seen).length;
+  const cnt = t => PLANTS.filter(p => p.type === t).length;
+  $('stats').innerHTML = `<span><b>${PLANTS.length}</b>종</span><span>나무 <b>${cnt('나무')}</b></span><span>덩굴 <b>${cnt('덩굴')}</b></span><span>풀 <b>${cnt('풀')}</b></span><span>양치식물 <b>${cnt('양치식물')}</b></span><span>내가 본 식물 <b>${seenCount}</b>종</span>`;
+}
+
+$('grid').addEventListener('click', e => { const c = e.target.closest('.card'); if (c) openSheet(+c.dataset.id); });
+
+const dlg = $('sheet');
+function openSheet(id) {
+  const p = PLANTS[id];
+  const q = encodeURIComponent(p.n.replace(/\s*\(.*\)/, '') + ' 식물');
+  const idx = shown.findIndex(s => s.id === id);
+  const prev = shown[idx - 1], next = shown[idx + 1];
+  dlg.innerHTML = `<div class="sheet">
+    <div class="sheet-head">
+      <span class="glyph">${leafSvg(p.leaf)}</span>
+      <div class="sheet-title"><h2 id="sheet-name">${p.n}</h2><div class="sci">${p.sci}</div><div class="fam">${p.fam} · ${p.type}</div></div>
+      <button type="button" class="close" id="close" aria-label="닫기">✕</button>
+    </div>
+    <div class="tags">${p.hab.map(h => `<span class="tag">${HAB[h]}</span>`).join('')}<span class="tag">${LEAF[p.leaf].label}</span>${p.col.map(c => `<span class="tag">${dot(c)} ${COLOR[c]}</span>`).join('')}</div>
+    <div><div class="sec-label">${p.type === '양치식물' ? '새순이 나는 때' : '꽃 피는 때'}</div>${monthsHtml(p.m, true)}</div>
+    ${p.warn ? `<div class="caution">주의 · ${p.warn}</div>` : ''}
+    <div class="sheet-grid">
+      <div><div class="sec-label">잎의 특징</div><p>${p.leafTxt}</p></div>
+      <div><div class="sec-label">잎 이외의 구조</div><p>${p.part}</p></div>
+      <div><div class="sec-label">광합성 · 생활 포인트</div><p>${p.ps}</p></div>
+      <div><div class="sec-label">이야기</div><p>${p.story}</p></div>
+    </div>
+    <div class="record"><span class="sec-label">봉화 기록</span> ${p.src.map(k => SRC_NAME[k]).join(' · ')}</div>
+    <div class="checklist"><div class="sec-label">직접 관찰할 때 확인해 보세요</div><ul>
+      <li>잎이 줄기에 어떻게 붙어 있나요? (어긋나기 · 마주나기 · 돌려나기 · 모여나기)</li>
+      <li>잎맥은 그물맥인가요, 나란히맥인가요?</li>
+      <li>잎 가장자리에 톱니가 있나요? 잎에 털이 있나요?</li>
+      <li>이 식물이 사는 곳은 햇빛, 물, 온도가 어떤가요?</li>
+    </ul></div>
+    <div class="sheet-foot">
+      <div class="links">
+        <button type="button" class="btn ${seen[p.id] ? '' : 'primary'}" id="seen-btn">${seen[p.id] ? `✓ ${seen[p.id]}에 봤어요 · 취소` : '직접 봤어요'}</button>
+        <a class="btn" href="https://search.naver.com/search.naver?where=image&query=${q}" target="_blank" rel="noopener">사진 찾아보기 ↗</a>
+        <a class="btn" href="https://www.nature.go.kr" target="_blank" rel="noopener">국가생물종지식정보시스템 ↗</a>
+      </div>
+      <div class="nav">
+        <button type="button" class="btn" id="prev" ${prev ? '' : 'disabled'} aria-label="이전 식물">← ${prev ? prev.n.replace(/\s*\(.*\)/, '') : ''}</button>
+        <button type="button" class="btn" id="next" ${next ? '' : 'disabled'} aria-label="다음 식물">${next ? next.n.replace(/\s*\(.*\)/, '') : ''} →</button>
+      </div>
+    </div>
+  </div>`;
+  $('close').onclick = () => dlg.close();
+  $('seen-btn').onclick = () => {
+    if (seen[p.id]) delete seen[p.id];
+    else { const d = new Date(); seen[p.id] = `${d.getMonth() + 1}월 ${d.getDate()}일`; }
+    saveSeen(); render(); openSheet(id);
+  };
+  if (prev) $('prev').onclick = () => openSheet(prev.id);
+  if (next) $('next').onclick = () => openSheet(next.id);
+  if (!dlg.open) dlg.showModal();
+}
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+render();
+</script>
+
+</body>
+</html>
